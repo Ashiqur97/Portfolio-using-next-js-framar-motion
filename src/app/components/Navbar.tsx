@@ -25,16 +25,18 @@ const Navbar = () => {
                 <Link  href="/" className="text-xl font-bold text-primary">Ashiqur Rahman</Link>
 
                 <div className='hidden md:flex items-center space-x-8'>
-                           {menuItems.map((item) => (
-                            const isActive = pathname === item.href;
-              <Link 
-                key={item.href}
-                href={item.href} 
-                className={`hover:text-primary transition-colors ${isActive ? 'font-semibold text-primary' : ''}`}
-              >
-                {item.label}
-              </Link>
-            ))}
+          {menuItems.map((item) => {
+  const isActive = pathname === item.href;
+  return (
+    <Link 
+      key={item.href}
+      href={item.href} 
+      className={`hover:text-primary transition-colors ${isActive ? 'font-semibold text-primary' : ''}`}
+    >
+      {item.label}
+    </Link>
+  );
+})}
                 </div>
             </div>
         </div>
