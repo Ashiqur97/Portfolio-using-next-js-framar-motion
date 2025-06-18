@@ -4,9 +4,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React,{useState} from 'react'
 import { Bars3Icon, MoonIcon, SunIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useTheme } from '../context/ThemeContext'
 
 const Navbar = () => {
-  const theme = "dark";
+   const { theme, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
   
@@ -46,7 +47,7 @@ const Navbar = () => {
               );
             })}
 
-            <button className='p-2 rounded-lg hover:bg-gray-100 text-white hover:text-primary dark:hover:bg-gray-800 transition-colors cursor-pointer'>
+            <button onClick={toggleTheme} className='p-2 rounded-lg hover:bg-gray-100 text-white hover:text-primary dark:hover:bg-gray-800 transition-colors cursor-pointer'>
               {theme === "dark" ? (
                 <SunIcon className='w-5 h-5' />
               ) : (
@@ -82,7 +83,7 @@ const Navbar = () => {
               <div className='pt-4 mt-4 border-t border-gray-200 dark:border-gray-700'>
                 <button 
                   className='flex items-center py-2 hover:text-primary transition-colors'
-                  onClick={() => {}}
+                  onClick={toggleTheme}
                 >
                   {theme === 'dark' ? (
                     <SunIcon className='w-5 h-5 mr-2' />
