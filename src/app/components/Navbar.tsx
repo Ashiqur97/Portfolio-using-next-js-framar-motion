@@ -3,8 +3,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React,{useState} from 'react'
+import { Bars3Icon, MoonIcon, SunIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
+  const theme = "dark"
     const [isMobileMenuOpen,setIsMobileMenuOpen] = useState<boolean>(false);
     const pathname = usePathname();
     const toggleMobileMenu = () => {
@@ -28,16 +30,34 @@ const Navbar = () => {
           {menuItems.map((item) => {
   const isActive = pathname === item.href;
   return (
-    <Link 
-      key={item.href}
-      href={item.href} 
-      className={`hover:text-primary transition-colors ${isActive ? 'font-semibold text-primary' : ''}`}
-    >
-      {item.label}
-    </Link>
-  );
-})}
+              <Link 
+                key={item.href}
+                href={item.href} 
+                className={`hover:text-primary transition-colors font-medium ${isActive ? 'text-primary' : ''}`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+
+          <button className='p-2 rounded-lg hover:bg-gray-100 text-priamry dark:hover:bg-gray-800 transition-colors cursor-pointer'>
+            {
+              theme === "dark" ? (
+                <SunIcon className='w-5 h-5'/>
+              ) : (
+                <MoonIcon className='w-5 h-5'/>
+              )
+            }
+          </button>
                 </div>
+
+                <button
+                onClick={toggleMobileMenu} 
+                className='md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer'>
+                  {
+                    isMobileMenuOpen ? (<XMarkIcon className='w-5 h-5'/>) : (<Bars3Icon className='w-5 h-5'/>)
+                  }
+                </button>
             </div>
         </div>
     </nav>
