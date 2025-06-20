@@ -2,6 +2,7 @@ import React from 'react'
 import Hero from './components/Hero'
 import Projects from './components/Projects'
 import Blogs from './components/Blogs'
+import Newsletter from './components/Newsletter'
 
 const page = () => {
   return (
@@ -9,6 +10,7 @@ const page = () => {
       <Hero/>
       <Projects />
       <Blogs />
+      <Newsletter />
     </main>
   )
 }
