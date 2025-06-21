@@ -11,7 +11,7 @@ export default function Footer() {
               Ashiqur Rahman
             </Link>
             <p className="text-sm text-secondary mt-2">
-              © {new Date().getFullYear()} Devfolio. All rights reserved.
+              © {new Date().getFullYear()} All rights reserved.
             </p>
           </div>
           
