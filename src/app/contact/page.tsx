@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaEnvelope, FaPhone } from "react-icons/fa";
+import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 
 const ContactPage = () => {
     return (
@@ -30,8 +30,29 @@ const ContactPage = () => {
                         </div>
 
                     </div>
+
+                            <div className="space-y-4">
+                        <div className="flex items-center gap-4">
+                            <FaMapMarkerAlt className="w-6 h-6 text-primary" />
+                            <div>
+                                <h3 className="text-semibold">Location:</h3>
+                                <p className="text-secondary">Dhaka,Bangladesh</p>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+
+            <div className="bg-white dark:bg-dark/50 p-6 rounded-lg shadow-md">
+                <form className="space-y-6">
+                    <div>
+                        <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent"/>
+                    </div>
+                </form>
+            </div>
+            
         </div>
         </div>
     )
