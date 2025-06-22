@@ -48,10 +48,24 @@ const ContactPage = () => {
                 <form className="space-y-6">
                     <div>
                         <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your name" className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent"/>
+                        <input required type="text" id="name" name="name" placeholder="Enter your name" className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent"/>
+                    </div>
+
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+                        <input required type="email" id="email" name="email" placeholder="Enter your email" className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent"/>
+                    </div>
+
+                       <div>
+                        <label htmlFor="message" className="block text-sm font-medium mb-2">Email</label>
+                        <textarea 
+                        rows={4} 
+                        required 
+                        id="message" name="message" placeholder="Enter your message" className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent"/>
                     </div>
                 </form>
             </div>
+
             
         </div>
         </div>
