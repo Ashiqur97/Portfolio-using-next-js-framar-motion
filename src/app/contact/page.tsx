@@ -1,7 +1,26 @@
+"use client"
+
 import Link from "next/link";
+import { useState } from "react";
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 
+interface FormData {
+    name: string;
+    email: string;
+    message: string;
+}
+
+type FormStatus = "idle" | "loading" | "success" | "error";
+
 const ContactPage = () => {
+      const [] = useState<FormData>({
+    name: '',
+    email: '',
+    message: ''
+  })
+  
+    const [status, setStatus] = useState<FormStatus>("idle");
+
     return (
         <div className="container max-w-7xl mx-auto py-20">
             <h1 className="text-4xl font-bold mb-8 text-center">Contact Me</h1>
@@ -63,6 +82,9 @@ const ContactPage = () => {
                         required 
                         id="message" name="message" placeholder="Enter your message" className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent"/>
                     </div>
+                        <button className="w-full btn btn-primary">
+                            {status === 'loading' ? "sending..." : "Send Message"}
+                        </button>
                 </form>
             </div>
 
