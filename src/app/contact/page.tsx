@@ -13,13 +13,42 @@ interface FormData {
 type FormStatus = "idle" | "loading" | "success" | "error";
 
 const ContactPage = () => {
-      const [] = useState<FormData>({
+      const [formData,setFormData] = useState<FormData>({
     name: '',
     email: '',
     message: ''
   })
   
     const [status, setStatus] = useState<FormStatus>("idle");
+
+     const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setStatus('loading')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) throw new Error('Failed to send message')
+      
+      setStatus('success')
+      setFormData({ name: '', email: '', message: '' })
+    } catch {
+      setStatus('error')
+    }
+  }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }))
+    }
 
     return (
         <div className="container max-w-7xl mx-auto py-20">
@@ -64,27 +93,49 @@ const ContactPage = () => {
             </div>
 
             <div className="bg-white dark:bg-dark/50 p-6 rounded-lg shadow-md">
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                         <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
-                        <input required type="text" id="name" name="name" placeholder="Enter your name" className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent"/>
+                        <input required 
+                        value={formData.name}
+                        onChange={handleChange}
+                        type="text" id="name" name="name" placeholder="Enter your name" 
+                        className="w-full px-4 py-2 rounded-md border placeholder:text-white/50 border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent"/>
                     </div>
 
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                        <input required type="email" id="email" name="email" placeholder="Enter your email" className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent"/>
+                        <input required 
+                        value={formData.email}
+                        onChange={handleChange}
+                        type="email" id="email" name="email" placeholder="Enter your email" 
+                        className="w-full px-4 py-2 rounded-md border placeholder:text-white/50 border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent"/>
                     </div>
 
                        <div>
                         <label htmlFor="message" className="block text-sm font-medium mb-2">Email</label>
                         <textarea 
                         rows={4} 
+                        value={formData.message}
+                        onChange={handleChange}
                         required 
-                        id="message" name="message" placeholder="Enter your message" className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent"/>
+                        id="message" name="message" placeholder="Enter your message" className="w-full px-4 py-2 rounded-md border placeholder:text-white/50 border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent"/>
                     </div>
-                        <button className="w-full btn btn-primary">
+                        <button type="submit" className="w-full btn btn-primary">
                             {status === 'loading' ? "sending..." : "Send Message"}
                         </button>
+
+                        {
+                            status === "success" && (
+                                <p className="text-green-500 text-center">Message sent successfully</p>
+                            )
+                        }
+
+                        {
+                            status === "error" && (
+                                <p className="text-red-500 text-center">Failed to send message.Please try again later</p>
+                            )
+                        }
                 </form>
             </div>
 
